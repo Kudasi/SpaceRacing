@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqurq1u60kcjp"]
+
+[ext_resource type="PackedScene" uid="uid://cpgq7y3rd6f30" path="res://scenes/lobby.tscn" id="1_w5aja"]
+[ext_resource type="PackedScene" uid="uid://osa8ig8c1hhr" path="res://scenes/level1.tscn" id="2_onqr8"]
+
+[node name="GameScene" type="Node2D"]
+
+[node name="Roads" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://doxqf3yylesd4", "uid://bstsqwauv345k")
+spawn_path = NodePath("../Roads")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Lobby" parent="CanvasLayer" node_paths=PackedStringArray("scene_spawn") instance=ExtResource("1_w5aja")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.5
+offset_top = -62.5
+offset_right = 202.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+start_scene = ExtResource("2_onqr8")
+scene_spawn = NodePath("../../Roads")

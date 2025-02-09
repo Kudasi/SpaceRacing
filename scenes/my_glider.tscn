@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bllmlu67e5kon"]
+
+[ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_d2yjo"]
+[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://spacegliders.png" id="2_soer1"]
+[ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="3_qv1vj"]
+
+[sub_resource type="Gradient" id="Gradient_mmwv6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_bymlf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_t2cfd"]
+properties/0/path = NodePath("Sprite2D:region_rect")
+properties/0/spawn = true
+properties/0/replication_mode = 0
+properties/1/path = NodePath("CollisionPolygon2D:polygon")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[node name="MyGlider" type="RigidBody2D"]
+script = ExtResource("1_d2yjo")
+trails = Array[NodePath]([NodePath("Trail")])
+metadata/_custom_type_script = ExtResource("1_d2yjo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_soer1")
+region_enabled = true
+region_rect = Rect2(5, 49, 38, 46)
+
+[node name="Trail" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2(-19, 0)
+script = ExtResource("3_qv1vj")
+fps = 15
+color = SubResource("Gradient_mmwv6")
+width_curve = SubResource("Curve_bymlf")
+metadata/_custom_type_script = ExtResource("3_qv1vj")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_t2cfd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(23, 7, -12, 19, -22, 9, -22, -9, -12, -19, 23, -7)

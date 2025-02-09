@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bstsqwauv345k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bfwt"]
+size = Vector2(250, 20)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wekm0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Wall1" type="StaticBody2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-125, -10, 125, -10, 125, 10, -125, 10)
+
+[node name="Line2D" type="Line2D" parent="Polygon2D"]
+points = PackedVector2Array(-125, 9, -125, -10, 125, -10, 125, 11)
+width = 6.0
+default_color = Color(2.11775e-06, 0.917834, 0.922853, 1)
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_4bfwt")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wekm0")

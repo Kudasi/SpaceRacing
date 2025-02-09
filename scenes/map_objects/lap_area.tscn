@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://doxqf3yylesd4"]
+
+[node name="LapArea" type="Area2D"]

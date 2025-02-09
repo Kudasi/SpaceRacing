@@ -1,0 +1,100 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpgq7y3rd6f30"]
+
+[ext_resource type="Script" uid="uid://dftpmfgagkclx" path="res://scripts/lobby.gd" id="1_o1atq"]
+
+[node name="Lobby" type="PanelContainer"]
+offset_right = 405.0
+offset_bottom = 90.0
+script = ExtResource("1_o1atq")
+
+[node name="Setup" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Setup"]
+layout_mode = 2
+
+[node name="GliderSelect" type="HBoxContainer" parent="Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="GlidersList" type="OptionButton" parent="Setup/VBoxContainer/GliderSelect"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+fit_to_longest_item = false
+allow_reselect = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Setup/VBoxContainer/GliderSelect"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+
+[node name="Nickname" type="LineEdit" parent="Setup/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Your nickname..."
+max_length = 25
+
+[node name="Game" type="HBoxContainer" parent="Setup/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Setup/VBoxContainer/Game"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IPAddres" type="LineEdit" parent="Setup/VBoxContainer/Game/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Enter server address..."
+
+[node name="ConnectButton" type="Button" parent="Setup/VBoxContainer/Game/VBoxContainer"]
+layout_mode = 2
+text = "Connect"
+
+[node name="HostButton" type="Button" parent="Setup/VBoxContainer/Game"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host server
+"
+
+[node name="PlayersList" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayersList"]
+layout_mode = 2
+
+[node name="PlayersList" type="ItemList" parent="PlayersList/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_search = false
+auto_height = true
+item_count = 2
+item_0/text = "Player1"
+item_1/text = "Player2"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayersList/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="KickButton" type="Button" parent="PlayersList/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kick"
+
+[node name="StartButton" type="Button" parent="PlayersList/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start
+"
+
+[connection signal="pressed" from="Setup/VBoxContainer/Game/VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
+[connection signal="pressed" from="Setup/VBoxContainer/Game/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="PlayersList/VBoxContainer/HBoxContainer/KickButton" to="." method="_on_kick_button_pressed"]
+[connection signal="pressed" from="PlayersList/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

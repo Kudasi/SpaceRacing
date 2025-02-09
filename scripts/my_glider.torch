@@ -1,0 +1,10 @@
+[orchestration type="OScript" load_steps=2 format=3 uid="uid://pliqfd0eblm5"]
+
+[obj type="OScriptGraph" id="OScriptGraph_bfxbo"]
+graph_name = &"EventGraph"
+offset = Vector2(0, -216)
+flags = 8
+
+[resource]
+base_type = &"SpaceGlider"
+graphs = Array[OScriptGraph]([SubResource("OScriptGraph_bfxbo")])

@@ -1,0 +1,81 @@
+[gd_scene load_steps=18 format=3 uid="uid://di32eigbqxn4f"]
+
+[ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_6uqi0"]
+[ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="2_8uh7m"]
+[ext_resource type="Script" uid="uid://ijja070403oq" path="res://scripts/camera_2d_controller.gd" id="4_ppyta"]
+[ext_resource type="Script" uid="uid://vjcgjjkcnpu3" path="res://addons/robogodo/scripts/smart_parallax.gd" id="6_ehkex"]
+[ext_resource type="Script" uid="uid://dmnshxtjvg580" path="res://addons/robogodo/scripts/smart_parallax_layer.gd" id="7_xersf"]
+[ext_resource type="Texture2D" uid="uid://dkvd4u43m73dn" path="res://images/background/background_1.png" id="8_00tp4"]
+[ext_resource type="Texture2D" uid="uid://2qv44iaixn41" path="res://images/background/background_2.png" id="9_77dp3"]
+[ext_resource type="Texture2D" uid="uid://c835iex10scp2" path="res://images/background/background_3.png" id="10_5tkv4"]
+[ext_resource type="Texture2D" uid="uid://djmwpgtyx6yvy" path="res://images/background/background_4.png" id="11_0m0f1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykrsh"]
+friction = 0.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xersf"]
+
+[sub_resource type="Gradient" id="Gradient_6uqi0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_ykrsh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_77dp3"]
+script = ExtResource("7_xersf")
+texture = ExtResource("10_5tkv4")
+lambda = 0.95
+metadata/_custom_type_script = ExtResource("7_xersf")
+
+[sub_resource type="Resource" id="Resource_b0q6j"]
+script = ExtResource("7_xersf")
+texture = ExtResource("9_77dp3")
+lambda = 0.975
+metadata/_custom_type_script = ExtResource("7_xersf")
+
+[sub_resource type="Resource" id="Resource_mhym6"]
+script = ExtResource("7_xersf")
+texture = ExtResource("8_00tp4")
+lambda = 0.988
+metadata/_custom_type_script = ExtResource("7_xersf")
+
+[sub_resource type="Resource" id="Resource_a3se8"]
+script = ExtResource("7_xersf")
+texture = ExtResource("11_0m0f1")
+lambda = 0.994
+metadata/_custom_type_script = ExtResource("7_xersf")
+
+[node name="Root" type="Node2D"]
+
+[node name="Spaceglider" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_ykrsh")
+linear_damp = 0.5
+script = ExtResource("1_6uqi0")
+rotation_speed = 6.28319
+
+[node name="Sprite2D" type="Sprite2D" parent="Spaceglider"]
+rotation = 1.5708
+texture = SubResource("CompressedTexture2D_xersf")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Spaceglider"]
+polygon = PackedVector2Array(23, 7, -12, 19, -22, 9, -22, -9, -12, -19, 23, -7)
+
+[node name="Trail" type="Node2D" parent="Spaceglider"]
+show_behind_parent = true
+position = Vector2(-19, 0)
+script = ExtResource("2_8uh7m")
+fps = 15
+color = SubResource("Gradient_6uqi0")
+width_curve = SubResource("Curve_ykrsh")
+metadata/_custom_type_script = ExtResource("2_8uh7m")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_ppyta")
+target = NodePath("../Spaceglider")
+
+[node name="SmartParallax" type="Node2D" parent="."]
+z_index = -100
+script = ExtResource("6_ehkex")
+layers = Array[ExtResource("7_xersf")]([SubResource("Resource_77dp3"), SubResource("Resource_b0q6j"), SubResource("Resource_mhym6"), SubResource("Resource_a3se8")])
+metadata/_custom_type_script = ExtResource("6_ehkex")

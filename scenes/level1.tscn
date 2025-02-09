@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://osa8ig8c1hhr"]
+
+[ext_resource type="PackedScene" uid="uid://bstsqwauv345k" path="res://scenes/map_objects/wall_1.tscn" id="1_g2h75"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="Wall1" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(259, 154)
+
+[node name="Wall2" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(478, 48)
+rotation = -0.869179
+
+[node name="Wall3" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(418, 392)
