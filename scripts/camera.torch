@@ -14,7 +14,7 @@ id = 0
 
 [obj type="OScriptGraph" id="OScriptGraph_vy24e"]
 graph_name = &"EventGraph"
-offset = Vector2(-237.233, -281.389)
+offset = Vector2(-235.702, -56.1195)
 zoom = 0.561195
 flags = 8
 nodes = Array[int]([0, 1, 3, 7])
@@ -23,7 +23,7 @@ functions = Array[int]([0])
 [obj type="OScriptNodeEvent" id="OScriptNodeEvent_vy24e"]
 function_id = "731930FD-47AA-4C14-8D8D-BC48780D2160"
 id = 0
-position = Vector2(-440, -120)
+position = Vector2(-420, -100)
 pin_data = Array[Dictionary]([{
 "pin_name": &"ExecOut",
 "dir": 1,
@@ -32,8 +32,7 @@ pin_data = Array[Dictionary]([{
 "pin_name": &"delta",
 "type": 3,
 "dir": 1,
-"flags": 2,
-"dv": 0.0
+"flags": 2
 }])
 
 [obj type="OScriptNodeCallMemberFunction" id="OScriptNodeCallMemberFunction_wxrgs"]
@@ -50,7 +49,7 @@ method = {
 }
 chain = false
 id = 1
-position = Vector2(640, -100)
+position = Vector2(400, -100)
 pin_data = Array[Dictionary]([{
 "pin_name": &"ExecIn",
 "flags": 4
@@ -85,20 +84,18 @@ method = {
 }
 chain = false
 id = 3
-position = Vector2(220, -20)
+position = Vector2(140, -20)
 pin_data = Array[Dictionary]([{
 "pin_name": &"target",
 "type": 24,
 "flags": 2050,
 "label": "Node2D",
-"target_class": "Node2D",
-"dv": null
+"target_class": "Node2D"
 }, {
 "pin_name": &"return_value",
 "type": 5,
 "dir": 1,
-"flags": 1026,
-"dv": Vector2(0, 0)
+"flags": 1026
 }])
 
 [obj type="OScriptNodeVariableGet" id="OScriptNodeVariableGet_jjfba"]

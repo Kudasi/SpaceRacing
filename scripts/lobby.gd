@@ -10,11 +10,12 @@ var glider_list_data : Array[Dictionary] = []
 var gliders : Array[String] = []
 
 func _ready() -> void:
-	$Setup/VBoxContainer/Label.text = "Session: " + OS.get_cmdline_args()[1]
+	#$Setup/VBoxContainer/Label.text = "Session: " + OS.get_cmdline_args()[1]
 	
 	MultiplayerManager.player_connected.connect(_update_player_list)
 	MultiplayerManager.player_disconnected.connect(_update_player_list)
 	MultiplayerManager.server_disconnected.connect(_disconnected_from_server)
+	MultiplayerManager.player_info.glider_color = 0
 	
 	var glider_index := 0
 	for glider_path in DirAccess.get_files_at("res://gliders"):
@@ -24,6 +25,7 @@ func _ready() -> void:
 		var sprite : Sprite2D = glider.get_node("Sprite2D")
 		
 		glider_list_data.append({})
+		glider_list_data[glider_index].region = sprite.region_rect
 		glider_list_data[glider_index].display_name = glider.get_meta(&"display_name", "[unknown]")
 		glider_list_data[glider_index].display_speed = glider.get_meta(&"display_speed", -1)
 		glider_list_data[glider_index].display_maneurity = glider.get_meta(&"display_maneurity", -1)
@@ -31,15 +33,19 @@ func _ready() -> void:
 		glider_list_data[glider_index].skill_name = glider.get_meta(&"skill_name", "[unknown]")
 		glider_list_data[glider_index].skill_desc = glider.get_meta(&"skill_desc", null)
 		
-		var texture : AtlasTexture = AtlasTexture.new()
-		texture.atlas = sprite.texture
-		texture.region = sprite.region_rect
-		%GlidersList.add_icon_item(texture, glider_list_data[glider_index].display_name)
+		%GlidersList.add_item(glider_list_data[glider_index].display_name)
 		
 		glider.free()
 		
 	%GlidersList.selected = 0
-	
+
+func _on_gliders_list_item_selected(index: int) -> void:
+	%GliderSprite.region_rect = glider_list_data[index].region
+
+func _on_color_slider_value_changed(value: float) -> void:
+	MultiplayerManager.player_info.glider_color = value
+	%GliderSprite.material.set_shader_parameter("Shift", value)
+
 func _update_player_list(a, b=null):
 	%PlayersList.clear()
 	for player in MultiplayerManager.players:
@@ -90,14 +96,17 @@ func _on_start_button_pressed() -> void:
 @rpc("call_local", "reliable")
 func start_game():
 	visible = false
+	print(MultiplayerManager.player_info)
+	print(MultiplayerManager.players)
 
 @rpc("call_local", "reliable")
 func spawn_player(transform : Transform2D, id : int):
 	var glider : SpaceGlider = load(MultiplayerManager.players[id].glider_scene).instantiate()
 	glider.tree_entered.connect(func(): 
 		glider.transform = transform
-		glider.set_multiplayer_authority(id)
+		glider.set_multiplayer_authority(id)	
 		player_added.emit(glider)
+		glider.get_node("Sprite2D").material.set_shader_parameter.call_deferred("Shift", MultiplayerManager.players[id].glider_color)
 	)
 	get_tree().current_scene.add_child(glider)
 	

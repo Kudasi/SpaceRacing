@@ -1,16 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://osa8ig8c1hhr"]
+[gd_scene load_steps=4 format=3 uid="uid://osa8ig8c1hhr"]
 
 [ext_resource type="PackedScene" uid="uid://bstsqwauv345k" path="res://scenes/map_objects/wall_1.tscn" id="1_g2h75"]
 [ext_resource type="PackedScene" uid="uid://2w077xcjcexe" path="res://scenes/map_objects/spawn_point.tscn" id="2_wwpf4"]
+[ext_resource type="PackedScene" uid="uid://cv0v8ys5rpxfw" path="res://scenes/map_objects/corner_1.tscn" id="3_m7ahb"]
 
 [node name="Level1" type="Node2D"]
 
 [node name="Wall1" parent="." instance=ExtResource("1_g2h75")]
-position = Vector2(259, 154)
-
-[node name="Wall2" parent="." instance=ExtResource("1_g2h75")]
-position = Vector2(478, 48)
-rotation = -0.869179
+position = Vector2(156, 392)
 
 [node name="Wall3" parent="." instance=ExtResource("1_g2h75")]
 position = Vector2(418, 392)
@@ -23,3 +20,64 @@ position = Vector2(305, 246)
 
 [node name="SpawnPoint3" parent="." instance=ExtResource("2_wwpf4")]
 position = Vector2(299, 286)
+
+[node name="Wall2" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(679, 262)
+
+[node name="Wall4" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(681, 1)
+rotation = -1.57079
+
+[node name="Wall5" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(420, 5)
+rotation = 1.57079
+
+[node name="Wall6" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(421, 157)
+rotation = -3.14159
+
+[node name="Wall7" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(163, 157)
+rotation = -3.14159
+
+[node name="Wall8" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(430, -249)
+rotation = -1.57079
+
+[node name="Wall9" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(170, -379)
+rotation = -3.14159
+
+[node name="Wall10" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(169, -118)
+rotation = -6.28318
+
+[node name="Wall11" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-91, 3)
+
+[node name="Wall12" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-100, 285)
+rotation = 3.14159
+
+[node name="Wall13" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-92, -252)
+rotation = 3.14159
+
+[node name="Wall14" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-341, -4)
+rotation = -3.14159
+
+[node name="Wall15" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(-228, 251)
+rotation = -1.57079
+
+[node name="Wall16" parent="." instance=ExtResource("1_g2h75")]
+position = Vector2(-468, 255)
+rotation = 1.57079
+
+[node name="Wall17" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-92, 514)
+
+[node name="Wall18" parent="." instance=ExtResource("3_m7ahb")]
+position = Vector2(-342, 515)
+rotation = 1.57079

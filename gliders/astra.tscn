@@ -1,8 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://cptg1fo76kpps"]
+[gd_scene load_steps=10 format=3 uid="uid://cptg1fo76kpps"]
 
 [ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_dlman"]
 [ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://images/spacegliders.png" id="2_0854p"]
+[ext_resource type="Shader" uid="uid://dx5y7casosjwb" path="res://shaders/recolor.tres" id="2_nvyk6"]
 [ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="3_nvyk6"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0854p"]
+friction = 0.1
+bounce = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_io5ke"]
+shader = ExtResource("2_nvyk6")
+shader_parameter/Shift = 0.0
 
 [sub_resource type="Gradient" id="Gradient_io5ke"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -29,8 +38,13 @@ properties/4/spawn = true
 properties/4/replication_mode = 1
 
 [node name="Astra" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_0854p")
 sleeping = true
 script = ExtResource("1_dlman")
+fly_speed = 350.0
+rotation_speed = 3.49066
+stabilization = 0.3
+braking_power = 0.2
 trails = Array[NodePath]([NodePath("Trail")])
 metadata/_custom_type_script = ExtResource("1_dlman")
 metadata/display_name = "Astra"
@@ -41,6 +55,7 @@ metadata/skill_name = ""
 metadata/skill_desc = ""
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_io5ke")
 rotation = 1.5708
 texture = ExtResource("2_0854p")
 region_enabled = true
@@ -60,4 +75,5 @@ replication_config = SubResource("SceneReplicationConfig_i4yo5")
 visibility_update_mode = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(23, 7, -12, 19, -22, 9, -22, -9, -12, -19, 23, -7)

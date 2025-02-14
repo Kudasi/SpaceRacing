@@ -39,8 +39,7 @@ pin_data = Array[Dictionary]([{
 "type": 24,
 "dir": 1,
 "flags": 2,
-"target_class": "SpaceGlider",
-"dv": null
+"target_class": "SpaceGlider"
 }])
 
 [obj type="OScriptNodeBranch" id="OScriptNodeBranch_vnkvh"]
@@ -75,8 +74,7 @@ pin_data = Array[Dictionary]([{
 "type": 24,
 "dir": 1,
 "flags": 2050,
-"target_class": "Camera2D",
-"dv": null
+"target_class": "Camera2D"
 }])
 
 [obj type="OScriptNodeCallMemberFunction" id="OScriptNodeCallMemberFunction_1xpy5"]
@@ -109,8 +107,7 @@ pin_data = Array[Dictionary]([{
 "type": 24,
 "flags": 2050,
 "label": "Object",
-"target_class": "Object",
-"dv": null
+"target_class": "Object"
 }, {
 "pin_name": &"property",
 "type": 21,
@@ -142,14 +139,12 @@ pin_data = Array[Dictionary]([{
 "type": 24,
 "flags": 2050,
 "label": "Node",
-"target_class": "Node",
-"dv": null
+"target_class": "Node"
 }, {
 "pin_name": &"return_value",
 "type": 1,
 "dir": 1,
-"flags": 1026,
-"dv": false
+"flags": 1026
 }])
 
 [obj type="OScriptNodeCallBuiltinFunction" id="OScriptNodeCallBuiltinFunction_jjfba"]
@@ -165,7 +160,7 @@ method = {
 }
 variable_arg_count = 1
 id = 7
-position = Vector2(960, 20)
+position = Vector2(780, 60)
 pin_data = Array[Dictionary]([{
 "pin_name": &"ExecIn",
 "flags": 4
@@ -185,7 +180,7 @@ pin_data = Array[Dictionary]([{
 
 [obj type="OScriptNodeComposeFrom" id="OScriptNodeComposeFrom_coo4b"]
 id = 8
-position = Vector2(640, 140)
+position = Vector2(400, 240)
 pin_data = Array[Dictionary]([{
 "pin_name": &"from",
 "type": 4,
