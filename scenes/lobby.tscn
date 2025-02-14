@@ -17,20 +17,8 @@ theme_override_constants/margin_bottom = 12
 [node name="VBoxContainer" type="VBoxContainer" parent="Setup"]
 layout_mode = 2
 
-[node name="GliderSelect" type="HBoxContainer" parent="Setup/VBoxContainer"]
+[node name="Label" type="Label" parent="Setup/VBoxContainer"]
 layout_mode = 2
-
-[node name="GlidersList" type="OptionButton" parent="Setup/VBoxContainer/GliderSelect"]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-fit_to_longest_item = false
-allow_reselect = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Setup/VBoxContainer/GliderSelect"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-bbcode_enabled = true
 
 [node name="Nickname" type="LineEdit" parent="Setup/VBoxContainer"]
 unique_name_in_owner = true
@@ -59,6 +47,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Host server
 "
+
+[node name="GlidersList" type="OptionButton" parent="Setup/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+fit_to_longest_item = false
+allow_reselect = true
 
 [node name="PlayersList" type="MarginContainer" parent="."]
 visible = false
@@ -96,5 +91,6 @@ text = "Start
 
 [connection signal="pressed" from="Setup/VBoxContainer/Game/VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
 [connection signal="pressed" from="Setup/VBoxContainer/Game/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="item_selected" from="Setup/VBoxContainer/GlidersList" to="." method="_on_gliders_list_item_selected"]
 [connection signal="pressed" from="PlayersList/VBoxContainer/HBoxContainer/KickButton" to="." method="_on_kick_button_pressed"]
 [connection signal="pressed" from="PlayersList/VBoxContainer/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

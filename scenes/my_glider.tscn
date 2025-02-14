@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bllmlu67e5kon"]
 
 [ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_d2yjo"]
-[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://spacegliders.png" id="2_soer1"]
+[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://images/spacegliders.png" id="2_soer1"]
 [ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="3_qv1vj"]
 
 [sub_resource type="Gradient" id="Gradient_mmwv6"]

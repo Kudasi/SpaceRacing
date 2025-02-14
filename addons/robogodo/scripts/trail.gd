@@ -23,7 +23,7 @@ class TrailNode:
 		
 var first : TrailNode
 var refresh_delay := 0.0
-var emitting := false
+@export var emitting := false
 
 
 func _process(delta):

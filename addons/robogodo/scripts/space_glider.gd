@@ -20,8 +20,12 @@ class_name SpaceGlider
 @export var reload : float 
 
 var direction : Vector2 = Vector2.ZERO
+
+func _ready() -> void:
+	angular_damp = rotation_speed / 10.0
 	
 func _process(delta: float) -> void:
+	
 	if not is_multiplayer_authority(): return
 	
 	direction = Vector2.ZERO
@@ -30,4 +34,13 @@ func _process(delta: float) -> void:
 	direction.x += int(Input.is_action_pressed(right))
 	direction.x -= int(Input.is_action_pressed(left))
 	
+	print(direction)
 	
+func _physics_process(delta: float) -> void:
+	for trail in trails:
+		get_node(trail).emitting = direction.y > 0
+		
+	if not is_multiplayer_authority(): return
+	
+	apply_central_impulse(Vector2.from_angle(rotation) * direction.y * 2.0 ** direction.y * fly_speed * delta)
+	apply_torque_impulse(direction.x * rotation_speed * 1000.0 * delta)

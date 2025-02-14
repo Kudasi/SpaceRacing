@@ -1,7 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bstsqwauv345k"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4bfwt"]
-size = Vector2(256, 16)
+[gd_scene load_steps=2 format=3 uid="uid://cv0v8ys5rpxfw"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wekm0"]
 properties/0/path = NodePath(".:position")
@@ -14,18 +11,19 @@ properties/1/replication_mode = 0
 [node name="Wall1" type="StaticBody2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-128, -8, 128, -8, 128, 8, -128, 8)
+position = Vector2(0, 128)
+polygon = PackedVector2Array(-128, -8, -64, -8, 0, -24, 64, -64, 104, -128, 120, -192, 120, -256, 136, -256, 136, -184, 120, -120, 80, -48, 8, -8, -56, 8, -128, 8)
 
 [node name="Line2D" type="Line2D" parent="Polygon2D"]
-points = PackedVector2Array(-128, 8, -128, -8, 128, -8, 128, 8)
+points = PackedVector2Array(-128, 8, -128, -8, -64, -8, 0, -24, 64, -64, 104, -128, 120, -192, 120, -256, 136, -256)
 width = 6.0
 default_color = Color(2.11775e-06, 0.917834, 0.922853, 1)
 joint_mode = 1
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4bfwt")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_wekm0")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-128, 120, -128, 120, -64, 120, 0, 104, 64, 64, 104, 0, 120, -64, 120, -128, 136, -128, 136, -56, 120, 8, 80, 80, 8, 120, -56, 136, -128, 136)

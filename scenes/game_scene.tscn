@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dqurq1u60kcjp"]
+[gd_scene load_steps=5 format=3 uid="uid://dqurq1u60kcjp"]
 
+[ext_resource type="Script" uid="uid://bqjfwe42lu54l" path="res://scripts/game_scene.torch" id="1_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://cpgq7y3rd6f30" path="res://scenes/lobby.tscn" id="1_w5aja"]
 [ext_resource type="PackedScene" uid="uid://osa8ig8c1hhr" path="res://scenes/level1.tscn" id="2_onqr8"]
+[ext_resource type="Script" uid="uid://r51uxkmoskcx" path="res://scripts/camera.torch" id="3_ycayy"]
 
 [node name="GameScene" type="Node2D"]
+script = ExtResource("1_bw6k5")
 
 [node name="Roads" type="Node2D" parent="."]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://doxqf3yylesd4", "uid://bstsqwauv345k")
+_spawnable_scenes = PackedStringArray("uid://doxqf3yylesd4", "uid://2w077xcjcexe", "uid://bstsqwauv345k", "uid://cv0v8ys5rpxfw")
 spawn_path = NodePath("../Roads")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -27,3 +30,8 @@ grow_horizontal = 2
 grow_vertical = 2
 start_scene = ExtResource("2_onqr8")
 scene_spawn = NodePath("../../Roads")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_ycayy")
+
+[connection signal="player_added" from="CanvasLayer/Lobby" to="." method="on_player_added"]

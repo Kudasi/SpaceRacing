@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cptg1fo76kpps"]
 
 [ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_dlman"]
-[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://spacegliders.png" id="2_0854p"]
+[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://images/spacegliders.png" id="2_0854p"]
 [ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="3_nvyk6"]
 
 [sub_resource type="Gradient" id="Gradient_io5ke"]
@@ -12,17 +12,33 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i4yo5"]
-properties/0/path = NodePath("Sprite2D:region_rect")
+properties/0/path = NodePath(".:linear_velocity")
 properties/0/spawn = true
-properties/0/replication_mode = 0
-properties/1/path = NodePath("CollisionPolygon2D:polygon")
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
 properties/1/spawn = true
-properties/1/replication_mode = 0
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:angular_velocity")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Trail:emitting")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Astra" type="RigidBody2D"]
+sleeping = true
 script = ExtResource("1_dlman")
 trails = Array[NodePath]([NodePath("Trail")])
 metadata/_custom_type_script = ExtResource("1_dlman")
+metadata/display_name = "Astra"
+metadata/display_speed = 3
+metadata/display_maneurity = 3
+metadata/display_attack = 2
+metadata/skill_name = ""
+metadata/skill_desc = ""
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -41,6 +57,7 @@ metadata/_custom_type_script = ExtResource("3_nvyk6")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i4yo5")
+visibility_update_mode = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(23, 7, -12, 19, -22, 9, -22, -9, -12, -19, 23, -7)

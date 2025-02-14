@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://osa8ig8c1hhr"]
+[gd_scene load_steps=3 format=3 uid="uid://osa8ig8c1hhr"]
 
 [ext_resource type="PackedScene" uid="uid://bstsqwauv345k" path="res://scenes/map_objects/wall_1.tscn" id="1_g2h75"]
+[ext_resource type="PackedScene" uid="uid://2w077xcjcexe" path="res://scenes/map_objects/spawn_point.tscn" id="2_wwpf4"]
 
 [node name="Level1" type="Node2D"]
 
@@ -13,3 +14,12 @@ rotation = -0.869179
 
 [node name="Wall3" parent="." instance=ExtResource("1_g2h75")]
 position = Vector2(418, 392)
+
+[node name="SpawnPoint" parent="." instance=ExtResource("2_wwpf4")]
+position = Vector2(307, 202)
+
+[node name="SpawnPoint2" parent="." instance=ExtResource("2_wwpf4")]
+position = Vector2(305, 246)
+
+[node name="SpawnPoint3" parent="." instance=ExtResource("2_wwpf4")]
+position = Vector2(299, 286)

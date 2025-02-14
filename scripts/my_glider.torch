@@ -2,7 +2,6 @@
 
 [obj type="OScriptGraph" id="OScriptGraph_bfxbo"]
 graph_name = &"EventGraph"
-offset = Vector2(0, -216)
 flags = 8
 
 [resource]
