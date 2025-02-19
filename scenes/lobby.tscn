@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q60fs"]
 shader = ExtResource("2_q60fs")
-shader_parameter/Shift = 0.256
+shader_parameter/Shift = null
 
 [node name="Lobby" type="PanelContainer"]
 offset_right = 405.0
@@ -42,12 +42,16 @@ layout_mode = 2
 placeholder_text = "Enter server address..."
 
 [node name="ConnectButton" type="Button" parent="Setup/VBoxContainer/Game/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+disabled = true
 text = "Connect"
 
 [node name="HostButton" type="Button" parent="Setup/VBoxContainer/Game"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+disabled = true
 text = "Host server
 "
 
@@ -129,6 +133,7 @@ size_flags_horizontal = 3
 text = "Start
 "
 
+[connection signal="text_changed" from="Setup/VBoxContainer/Nickname" to="." method="_on_nickname_text_changed"]
 [connection signal="pressed" from="Setup/VBoxContainer/Game/VBoxContainer/ConnectButton" to="." method="_on_connect_button_pressed"]
 [connection signal="pressed" from="Setup/VBoxContainer/Game/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="item_selected" from="Setup/VBoxContainer/HBoxContainer/VBoxContainer/GlidersList" to="." method="_on_gliders_list_item_selected"]

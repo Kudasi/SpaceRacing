@@ -1,3 +1,6 @@
+RemoteTransform2D
+Label
+SmartParallax
 SubViewportContainer
 Camera2D
 Sprite2D
@@ -9,6 +12,4 @@ HBoxContainer
 HSlider
 CollisionPolygon2D
 Area2D
-Label
 MultiplayerSpawner
-Marker2D

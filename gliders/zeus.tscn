@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://cptg1fo76kpps"]
+[gd_scene load_steps=11 format=3 uid="uid://dmihqxid0vkq8"]
 
-[ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_dlman"]
-[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://images/spacegliders.png" id="2_0854p"]
-[ext_resource type="FontFile" uid="uid://brpk7bpvh10fs" path="res://fonts/Hardpixel.otf" id="2_io5ke"]
-[ext_resource type="Shader" uid="uid://dx5y7casosjwb" path="res://shaders/recolor.tres" id="2_nvyk6"]
-[ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="3_nvyk6"]
+[ext_resource type="Script" uid="uid://2ex0ehfn07bl" path="res://addons/robogodo/scripts/space_glider.gd" id="1_wkw5k"]
+[ext_resource type="FontFile" uid="uid://brpk7bpvh10fs" path="res://fonts/Hardpixel.otf" id="2_jqmsa"]
+[ext_resource type="Shader" uid="uid://dx5y7casosjwb" path="res://shaders/recolor.tres" id="3_v786a"]
+[ext_resource type="Texture2D" uid="uid://bygd1wesyrfvl" path="res://images/spacegliders.png" id="4_l7fos"]
+[ext_resource type="Script" uid="uid://b4knsju0api43" path="res://addons/robogodo/scripts/trail.gd" id="5_7x8mb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0854p"]
 friction = 0.1
@@ -12,7 +12,7 @@ bounce = 0.25
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_io5ke"]
 resource_local_to_scene = true
-shader = ExtResource("2_nvyk6")
+shader = ExtResource("3_v786a")
 shader_parameter/Shift = 0.0
 
 [sub_resource type="Gradient" id="Gradient_io5ke"]
@@ -39,20 +39,19 @@ properties/4/path = NodePath("Trail:emitting")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="Astra" type="RigidBody2D"]
+[node name="Zeus" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_0854p")
 sleeping = true
-script = ExtResource("1_dlman")
-fly_speed = 350.0
-turn_speed = 3.14159
-linear_stabilization = 0.2
-angular_stabilization = 0.2
+script = ExtResource("1_wkw5k")
+turn_speed = 2.44346
+linear_stabilization = 0.4
+angular_stabilization = 0.45
 braking_power = 0.2
 trails = Array[NodePath]([NodePath("Trail")])
 draw_name = true
-name_font = ExtResource("2_io5ke")
-metadata/_custom_type_script = ExtResource("1_dlman")
-metadata/display_name = "Astra"
+name_font = ExtResource("2_jqmsa")
+metadata/_custom_type_script = ExtResource("1_wkw5k")
+metadata/display_name = "Zeus"
 metadata/display_speed = 3
 metadata/display_maneurity = 3
 metadata/display_attack = 2
@@ -62,22 +61,23 @@ metadata/skill_desc = ""
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_io5ke")
 rotation = 1.5708
-texture = ExtResource("2_0854p")
+texture = ExtResource("4_l7fos")
 region_enabled = true
-region_rect = Rect2(5, 49, 38, 46)
+region_rect = Rect2(5, 99, 38, 42)
 
 [node name="Trail" type="Node2D" parent="."]
 show_behind_parent = true
 position = Vector2(-19, 0)
-script = ExtResource("3_nvyk6")
+script = ExtResource("5_7x8mb")
 fps = 15
 color = SubResource("Gradient_io5ke")
+width = 8.0
 width_curve = SubResource("Curve_xtgf0")
-metadata/_custom_type_script = ExtResource("3_nvyk6")
+metadata/_custom_type_script = ExtResource("5_7x8mb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i4yo5")
 visibility_update_mode = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(23, 7, -12, 19, -22, 9, -22, -9, -12, -19, 23, -7, 5, 0)
+polygon = PackedVector2Array(21, 0, -8, 19, -22, 9, -22, -9, -8, -19)

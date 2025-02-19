@@ -4,7 +4,7 @@ extends PanelContainer
 @export var start_scene : PackedScene
 @export var scene_spawn : Node
 
-signal player_added(player : SpaceGlider)
+signal player_added(player : SpaceGlider, player_id : int)
 
 var glider_list_data : Array[Dictionary] = []
 var gliders : Array[String] = []
@@ -35,19 +35,27 @@ func _ready() -> void:
 		
 		%GlidersList.add_item(glider_list_data[glider_index].display_name)
 		
+		glider_index += 1
 		glider.free()
+	
+	print(glider_list_data)
 		
 	%GlidersList.selected = 0
 
 func _on_gliders_list_item_selected(index: int) -> void:
-	%GliderSprite.region_rect = glider_list_data[index].region
+	%GliderSprite.region_rect = glider_list_data[index].regionz
 
 func _on_color_slider_value_changed(value: float) -> void:
 	MultiplayerManager.player_info.glider_color = value
 	%GliderSprite.material.set_shader_parameter("Shift", value)
 
-func _update_player_list(a, b=null):
+func _on_nickname_text_changed(new_text: String) -> void:
+	%HostButton.disabled = not %Nickname.text.is_valid_unicode_identifier()
+	%ConnectButton.disabled = not %Nickname.text.is_valid_unicode_identifier()
+	
+func _update_player_list(_a, _b=null):
 	%PlayersList.clear()
+	MultiplayerManager.players.sort()
 	for player in MultiplayerManager.players:
 		%PlayersList.add_item(MultiplayerManager.players[player].name)
 
@@ -55,7 +63,7 @@ func _disconnected_from_server():
 	$Setup.visible = true
 	$PlayersList.visible = false	
 
-func _on_host_button_pressed() -> void:
+func _on_host_button_pressed() -> void:	
 	%KickButton.disabled = false
 	%StartButton.disabled = false
 	$Setup.visible = false
@@ -65,7 +73,7 @@ func _on_host_button_pressed() -> void:
 	MultiplayerManager.player_info.glider_scene = "res://gliders/" + gliders[%GlidersList.get_selected_id()]
 	MultiplayerManager.host_server()
 
-func _on_connect_button_pressed() -> void:
+func _on_connect_button_pressed() -> void:	
 	%KickButton.disabled = true
 	%StartButton.disabled = true
 	$Setup.visible = false
@@ -84,6 +92,7 @@ func _on_kick_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	for child in start_scene.instantiate().get_children():
+		child.owner = null
 		child.reparent(scene_spawn)
 		
 	start_game.rpc()
@@ -96,17 +105,16 @@ func _on_start_button_pressed() -> void:
 @rpc("call_local", "reliable")
 func start_game():
 	visible = false
-	print(MultiplayerManager.player_info)
-	print(MultiplayerManager.players)
 
 @rpc("call_local", "reliable")
 func spawn_player(transform : Transform2D, id : int):
 	var glider : SpaceGlider = load(MultiplayerManager.players[id].glider_scene).instantiate()
 	glider.tree_entered.connect(func(): 
+		glider.name = MultiplayerManager.players[id].name
 		glider.transform = transform
-		glider.set_multiplayer_authority(id)	
-		player_added.emit(glider)
-		glider.get_node("Sprite2D").material.set_shader_parameter.call_deferred("Shift", MultiplayerManager.players[id].glider_color)
+		glider.get_node("Sprite2D").material.set_shader_parameter("Shift", MultiplayerManager.players[id].glider_color)
+		glider.set_multiplayer_authority(id)
+		player_added.emit(glider, id)
 	)
 	get_tree().current_scene.add_child(glider)
 	

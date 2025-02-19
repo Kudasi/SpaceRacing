@@ -1,9 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqurq1u60kcjp"]
+[gd_scene load_steps=15 format=3 uid="uid://dqurq1u60kcjp"]
 
 [ext_resource type="Script" uid="uid://bqjfwe42lu54l" path="res://scripts/game_scene.torch" id="1_bw6k5"]
 [ext_resource type="PackedScene" uid="uid://cpgq7y3rd6f30" path="res://scenes/lobby.tscn" id="1_w5aja"]
 [ext_resource type="PackedScene" uid="uid://osa8ig8c1hhr" path="res://scenes/level1.tscn" id="2_onqr8"]
 [ext_resource type="Script" uid="uid://r51uxkmoskcx" path="res://scripts/camera.torch" id="3_ycayy"]
+[ext_resource type="Script" uid="uid://vjcgjjkcnpu3" path="res://addons/robogodo/scripts/smart_parallax.gd" id="5_kk2rg"]
+[ext_resource type="Script" uid="uid://dmnshxtjvg580" path="res://addons/robogodo/scripts/smart_parallax_layer.gd" id="6_b5spy"]
+[ext_resource type="Texture2D" uid="uid://dkvd4u43m73dn" path="res://images/background/background_1.png" id="7_utbpp"]
+[ext_resource type="Texture2D" uid="uid://2qv44iaixn41" path="res://images/background/background_2.png" id="8_mw25s"]
+[ext_resource type="Texture2D" uid="uid://c835iex10scp2" path="res://images/background/background_3.png" id="9_tcjrq"]
+[ext_resource type="Texture2D" uid="uid://djmwpgtyx6yvy" path="res://images/background/background_4.png" id="10_rvs2r"]
+
+[sub_resource type="Resource" id="Resource_kk2rg"]
+script = ExtResource("6_b5spy")
+texture = ExtResource("7_utbpp")
+lambda = 0.252
+metadata/_custom_type_script = ExtResource("6_b5spy")
+
+[sub_resource type="Resource" id="Resource_b5spy"]
+script = ExtResource("6_b5spy")
+texture = ExtResource("8_mw25s")
+lambda = 0.2
+metadata/_custom_type_script = ExtResource("6_b5spy")
+
+[sub_resource type="Resource" id="Resource_tqxxy"]
+script = ExtResource("6_b5spy")
+texture = ExtResource("9_tcjrq")
+lambda = 0.2
+metadata/_custom_type_script = ExtResource("6_b5spy")
+
+[sub_resource type="Resource" id="Resource_5ay1a"]
+script = ExtResource("6_b5spy")
+texture = ExtResource("10_rvs2r")
+lambda = 0.2
+metadata/_custom_type_script = ExtResource("6_b5spy")
 
 [node name="GameScene" type="Node2D"]
 script = ExtResource("1_bw6k5")
@@ -33,5 +63,12 @@ scene_spawn = NodePath("../../Roads")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("3_ycayy")
+
+[node name="SmartParallax" type="Node2D" parent="." node_paths=PackedStringArray("camera")]
+z_index = -100
+script = ExtResource("5_kk2rg")
+layers = Array[ExtResource("6_b5spy")]([SubResource("Resource_kk2rg"), SubResource("Resource_b5spy"), SubResource("Resource_tqxxy"), SubResource("Resource_5ay1a")])
+camera = NodePath("../Camera2D")
+metadata/_custom_type_script = ExtResource("5_kk2rg")
 
 [connection signal="player_added" from="CanvasLayer/Lobby" to="." method="on_player_added"]
